@@ -1,6 +1,9 @@
 # Importing necessary modules
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.document_loaders import TextLoader
+from decouple import config  # For reading configuration variables
+from langchain.text_splitter import CharacterTextSplitter  # Text splitting utility
+from langchain_community.document_loaders import TextLoader  # Text loading utility
+from langchain.vectorstores.chroma import Chroma  # Vector store for document embeddings
+from langchain_community.embeddings import OpenAIEmbeddings  # Embeddings utility
 
 # Creating a CharacterTextSplitter instance with specific configuration
 text_splitter = CharacterTextSplitter(
@@ -13,12 +16,24 @@ text_splitter = CharacterTextSplitter(
 loader = TextLoader("quotes.txt")
 
 # Loading and splitting text from the file using the configured text splitter
-docs = loader.load_and_split()
+docs = loader.load_and_split(text_splitter=text_splitter)
 
-# Iterating through each document (presumably each chunk of text)
-for doc in docs:
-    # Printing the content of each chunk
-    print(doc.page_content)
+# Initializing OpenAIEmbeddings with API key from environment variable
+embeddings = OpenAIEmbeddings(openai_api_key=config("OPENAI_API_KEY"))
 
-    # Printing an extra newline to visually separate chunks
+# Creating a Chroma vector store from the documents with embeddings
+# Persisting the vectors in the "emb" directory
+db = Chroma.from_documents(
+    docs,
+    embedding=embeddings,
+    persist_directory="emb"
+)
+
+# Performing similarity search with a query on the vector store
+response = db.similarity_search_with_score("what does God say about love")
+
+# Printing the results of the similarity search
+for result in response:
     print("\n")
+    print(result[1])  # Printing the similarity score
+    print(result[0].page_content)  # Printing the content of the matching document
