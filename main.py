@@ -1,47 +1,24 @@
-# Importing necessary classes and functions from langchain and decouple modules
-from langchain.chat_models import ChatOpenAI
-from langchain.chains import LLMChain
-from langchain.prompts import MessagesPlaceholder, HumanMessagePromptTemplate, ChatPromptTemplate
-from langchain.memory import ConversationSummaryMemory, ConversationBufferMemory, FileChatMessageHistory
-from decouple import config
+# Importing necessary modules
+from langchain.text_splitter import CharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
 
-# Initializing the ChatOpenAI Model with the OpenAI API key obtained from environment variables
-chat = ChatOpenAI(
-    api_key=config('openai_key'),
-    verbose=True  # Enable verbose logging
+# Creating a CharacterTextSplitter instance with specific configuration
+text_splitter = CharacterTextSplitter(
+    separator="\n",  # Set the separator to newline character
+    chunk_size=200,  # Set the maximum size of each chunk to 200 characters
+    chunk_overlap=0  # Set the overlap between chunks to 0 characters
 )
 
-# Initializing a ConversationSummaryMemory to manage conversation memory
-memory = ConversationSummaryMemory(
-    memory_key="messages",
-    return_messages=True,
-    llm=chat  # Linking the language model to the memory
-)
+# Creating a TextLoader instance for the file "quotes.txt"
+loader = TextLoader("quotes.txt")
 
-# Setting up the Chat Prompt Template for constructing prompts
-prompt = ChatPromptTemplate(
-    input_variables=["content", "messages"],
-    messages=[
-        MessagesPlaceholder(variable_name="messages"),  # Placeholder for previous messages
-        HumanMessagePromptTemplate.from_template("{content}")  # Template for user's input
-    ]
-)
+# Loading and splitting text from the file using the configured text splitter
+docs = loader.load_and_split()
 
-# Initializes a language model chain with the OpenAI model, prompt template, and memory
-chain = LLMChain(
-    llm=chat,
-    prompt=prompt,
-    memory=memory,
-    verbose=True  # Enable verbose logging for the chain
-)
+# Iterating through each document (presumably each chunk of text)
+for doc in docs:
+    # Printing the content of each chunk
+    print(doc.page_content)
 
-# Continuous loop for interactive chat
-while True:
-    # Get user input
-    content = input(">>> ")
-    
-    # Feed the input to the language model chain and get the response
-    response = chain({"content": content})
-    
-    # Print the response text
-    print(response['text'])
+    # Printing an extra newline to visually separate chunks
+    print("\n")
