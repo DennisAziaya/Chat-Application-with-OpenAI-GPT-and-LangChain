@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42320aee-4139-49bb-8757-55b462657795" name="Changes" comment="Integrate langchain library for building a Question-Answering system using the RetrievalQA chain. Configure ChatOpenAI and OpenAIEmbeddings instances, set up a Chroma vector store, and initialize a RedundantFilterRetriever for filtering redundant information. Run a sample query through the RetrievalQA chain and print the response. Define a custom retriever class, RedundantFilterRetriever, that extends BaseRetriever from langchain. The class includes attributes for embeddings and Chroma vector store. Implement a method to retrieve relevant documents based on a query using embeddings and Chroma. Provide an asynchronous version of the method with an empty implementation for future enhancements. Implement script for visualizing L2 distances of embedded words" />
+    <list default="true" id="42320aee-4139-49bb-8757-55b462657795" name="Changes" comment="Integrate langchain library for building a Question-Answering system using the RetrievalQA chain. Configure ChatOpenAI and OpenAIEmbeddings instances, set up a Chroma vector store, and initialize a RedundantFilterRetriever for filtering redundant information. Run a sample query through the RetrievalQA chain and print the response. Define a custom retriever class, RedundantFilterRetriever, that extends BaseRetriever from langchain. The class includes attributes for embeddings and Chroma vector store. Implement a method to retrieve relevant documents based on a query using embeddings and Chroma. Provide an asynchronous version of the method with an empty implementation for future enhancements. Implement script for visualizing L2 distances of embedded words">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +38,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
     "com.google.cloudcode.ide_session_index": "20240108_0000",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "E:/playground/ai/chatapp/Chat-Application-with-OpenAI-GPT-and-LangChain",
@@ -70,7 +74,7 @@
       <workItem from="1704315579299" duration="2659000" />
       <workItem from="1704395005787" duration="8729000" />
       <workItem from="1704446846509" duration="552000" />
-      <workItem from="1704736380721" duration="747000" />
+      <workItem from="1704736380721" duration="2608000" />
     </task>
     <task id="LOCAL-00001" summary="Implement text loading and splitting functionality">
       <option name="closed" value="true" />
@@ -104,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704404652246</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Integrate langchain library for building a Question-Answering system using the RetrievalQA chain. Configure ChatOpenAI and OpenAIEmbeddings instances, set up a Chroma vector store, and initialize a RedundantFilterRetriever for filtering redundant information. Run a sample query through the RetrievalQA chain and print the response. Define a custom retriever class, RedundantFilterRetriever, that extends BaseRetriever from langchain. The class includes attributes for embeddings and Chroma vector store. Implement a method to retrieve relevant documents based on a query using embeddings and Chroma. Provide an asynchronous version of the method with an empty implementation for future enhancements. Implement script for visualizing L2 distances of embedded words">
+      <option name="closed" value="true" />
+      <created>1704737207174</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704737207174</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
